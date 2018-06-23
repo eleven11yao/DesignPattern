@@ -1,16 +1,13 @@
 package adapter
 
 import (
+	"fmt"
 	"testing"
 )
 
 func TestAdapter(t *testing.T) {
-	pF := NewForwards("F")
-	pC := NewCenter("c")
-	pFC := NewTranslator("FC")
-
-	pF.attack()
-	pC.defense()
-	pFC.attack()
-	pFC.defense()
+	fmt.Println("-----Start------")
+	fmt.Println(NewPigAdapter().Start())
+	fmt.Println(NewEagleAdapter().Start())
+	fmt.Println("-----End------")
 }

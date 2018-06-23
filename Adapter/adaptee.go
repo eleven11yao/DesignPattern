@@ -11,34 +11,31 @@
 
 package adapter
 
-type Adapter interface {
-	Start()string
+type Pig struct {
+	name string
 }
 
-type PigAdapter struct {
-	pig Pig
+func NewPig() Pig {
+	p := Pig{"Pig"}
+	return p
 }
 
-func NewPigAdapter() Adapter {
-	p := PigAdapter{}
-	p.pig = NewPig()
-	return &p
+func (self *Pig) Run() string {
+	return self.name + "---run-on-the-groud"
 }
 
-func (self *PigAdapter) Start()string {
-	return self.pig.Run()
+/*------------------------------------------------------------*/
+
+type Eagle struct {
+	name string
 }
 
-type EagleAdapter struct {
-	eagle Eagle
+func NewEagle() Eagle {
+	p := Eagle{"Eagle"}
+	return p
 }
 
-func NewEagleAdapter() Adapter {
-	p := EagleAdapter{}
-	p.eagle = NewEagle()
-	return &p
+func (self *Eagle) Fly() string {
+	return self.name + "---fly-in-the-sky"
 }
 
-func (self *EagleAdapter) Start()string {
-	return self.eagle.Fly()
-}
