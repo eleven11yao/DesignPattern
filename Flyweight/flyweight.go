@@ -15,33 +15,51 @@ import (
 	"fmt"
 )
 
+const  DefaultState int = 100
 // 享元对象接口
 type IFlyweight interface {
 	Operation(int) //来自外部的状态
+	Show()
 }
 
 // 共享对象
 type ConcreteFlyweight struct {
 	name string
+	state int
 }
 
 func (c *ConcreteFlyweight) Operation(outState int) {
 	if c == nil {
 		return
 	}
-	fmt.Println("共享对象响应外部状态", outState)
+	c.state = outState
+}
+
+func (c *ConcreteFlyweight) Show() {
+	if c == nil {
+		return
+	}
+	fmt.Println(c.name,"---ConcreteFlyweight---", c.state)
 }
 
 // 不共享对象
 type UnsharedConcreteFlyweight struct {
 	name string
+	state int
+}
+
+func (c *UnsharedConcreteFlyweight) Show() {
+	if c == nil {
+		return
+	}
+	fmt.Println(c.name,"---UnsharedConcreteFlyweight---", c.state)
 }
 
 func (c *UnsharedConcreteFlyweight) Operation(outState int) {
 	if c == nil {
 		return
 	}
-	fmt.Println("不共享对象响应外部状态", outState)
+	c.state = outState
 }
 
 // 享元工厂对象
@@ -49,21 +67,22 @@ type FlyweightFactory struct {
 	flyweights map[string]IFlyweight
 }
 
-func (f *FlyweightFactory) Flyweight(name string) IFlyweight {
+func (f *FlyweightFactory) GetFlyweight(name string) IFlyweight {
 	if f == nil {
 		return nil
 	}
-	if name == "u" {
-		return &UnsharedConcreteFlyweight{"u"}
-	} else if _, ok := f.flyweights[name]; !ok {
-		f.flyweights[name] = &ConcreteFlyweight{name}
+  	if _, ok := f.flyweights[name]; !ok {
+		fmt.Println("Create New ConcreteFlyweight---", name)
+		f.flyweights[name] = &ConcreteFlyweight{name, DefaultState}
+	}else{
+		fmt.Println("Get ConcreteFlyweight---", name)
 	}
 	return f.flyweights[name]
 }
 
 func NewFlyweightFactory() *FlyweightFactory {
 	ff := FlyweightFactory{make(map[string]IFlyweight)}
-	ff.flyweights["a"] = &ConcreteFlyweight{"a"}
-	ff.flyweights["b"] = &ConcreteFlyweight{"b"}
+	ff.flyweights["a"] = &ConcreteFlyweight{"a", DefaultState}
+	ff.flyweights["u"] = &UnsharedConcreteFlyweight{"u", DefaultState}
 	return &ff
 }

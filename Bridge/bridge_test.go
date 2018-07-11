@@ -25,10 +25,10 @@ import (
 
 func TestBridgeStep1(t *testing.T) {
 	c := NewUniform()
-	s := NewShirt()	
-	w := NewWorker()
+	s := NewShirt()
 	
 	fmt.Println("-----Start------")
+	w := NewWorker()
 	w.SetCloth(c)
 	w.Dress()
 	w.Undress()

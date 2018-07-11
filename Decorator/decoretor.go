@@ -25,6 +25,7 @@ func (p *person) show() {
 type AbsstractPerson interface {
 	show()
 }
+
 type Decorator struct {
 	AbsstractPerson
 }

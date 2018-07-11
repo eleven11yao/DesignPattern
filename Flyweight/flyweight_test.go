@@ -7,18 +7,33 @@ import (
 func TestFlyweight(t *testing.T) {
 	ff := NewFlyweightFactory()
 
-	fya := ff.Flyweight("a")
+	fya := ff.GetFlyweight("a")
+	fya.Show()
 	fya.Operation(1)
+	fya.Show()
 
-	fyb := ff.Flyweight("b")
+	fyb := ff.GetFlyweight("b")
+	fyb.Show()
 	fyb.Operation(2)
+	fyb.Show()
 
-	fyc := ff.Flyweight("c")
+	fyc := ff.GetFlyweight("c")
+	fyc.Show()
 	fyc.Operation(3)
+	fyc.Show()
 
-	fyd := ff.Flyweight("d")
+	fyd := ff.GetFlyweight("d")
+	fyd.Show()
 	fyd.Operation(4)
+	fyd.Show()
 
-	fyu := ff.Flyweight("u")
+	fyu := ff.GetFlyweight("u")
+	fyu.Show()
 	fyu.Operation(5)
+	fyu.Show()
+
+	fyx := ff.GetFlyweight("b")
+	fyx.Show()
+	fyx.Operation(8)
+	fyx.Show()
 }
